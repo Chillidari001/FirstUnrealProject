@@ -7,4 +7,4 @@ Teleportation/Travel between two "planes"
 Advanced Character Movement
 Learn Particle System
 Implement forms of dynamic lights
-Continue learning and usage of Unreal C for all tasks.
+Continue learning and usage of Unreal C++ for all tasks.

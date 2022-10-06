@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "InteractionInterface.h"
+#include "Components/StaticMeshComponent.h"
 #include "Porter.generated.h"
 
 UCLASS()

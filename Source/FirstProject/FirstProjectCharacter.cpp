@@ -78,6 +78,9 @@ void AFirstProjectCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 	// handle touch devices
 	PlayerInputComponent->BindTouch(IE_Pressed, this, &AFirstProjectCharacter::TouchStarted);
 	PlayerInputComponent->BindTouch(IE_Released, this, &AFirstProjectCharacter::TouchStopped);
+
+	//Interaction
+	PlayerInputComponent->BindAction("Interact",IE_Pressed, this, &AFirstProjectCharacter::OnInteract);
 }
 
 void AFirstProjectCharacter::BeginPlay()
@@ -97,11 +100,6 @@ void AFirstProjectCharacter::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedCo
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	Interface = Cast<IInteractionInterface>(OtherActor);
-
-	if(Interface)
-	{
-		Interface->InteractWithMe();
-	}
 }
 
 
@@ -153,5 +151,13 @@ void AFirstProjectCharacter::MoveRight(float Value)
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
+	}
+}
+
+void AFirstProjectCharacter::OnInteract()
+{
+	if(Interface)
+	{
+		Interface->InteractWithMe();
 	}
 }

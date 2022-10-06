@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "FirstProjectCharacter.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "InteractionInterface.h"
 #include "Components/StaticMeshComponent.h"
 #include "Porter.generated.h"
@@ -24,7 +26,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	virtual void InteractWithMe() override;
+	virtual void InteractWithMe();
+
+	UPROPERTY(EditAnywhere, Category = "Porter");
+	APorter* OtherPorter;
+
+	UFUNCTION()
+	void Teleport(class AActor* OtherActor);
 
 private:
 	UPROPERTY(EditAnywhere)

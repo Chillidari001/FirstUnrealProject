@@ -33,5 +33,22 @@ void APorter::Tick(float DeltaTime)
 void APorter::InteractWithMe()
 {
 	UE_LOG(LogTemp,Warning, TEXT("Porter interacted with"));
+	Teleport(OtherPorter);
 }
 
+void APorter::Teleport(class AActor* OtherActor)
+{
+	if(OtherPorter)
+	{
+		AFirstProjectCharacter* character = Cast<AFirstProjectCharacter>(OtherActor);
+		if(character)
+		{
+			character->SetActorLocation(OtherPorter->GetActorLocation());
+		}
+	}
+}
+
+/*void APorter::TeleportBack(class AActor* OtherActor)
+{
+	if(OtherActor &&)
+}*/

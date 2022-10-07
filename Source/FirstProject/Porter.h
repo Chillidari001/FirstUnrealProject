@@ -47,4 +47,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	UWidgetComponent* InteractionUI;
+
+	/*About the process of teleporting the player, I had to delete PlayerStart and manually place the thirdpersoncharacter
+	 *pawn, and then place that pawn in the PlayerCharacter property used in the teleport function to actually teleport
+	 *the player. I doubt this is a good way of doing this but this is what works for now.*/
+	UPROPERTY(EditAnywhere)
+	APawn* PlayerCharacter;
 };

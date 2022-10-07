@@ -38,7 +38,7 @@ void APorter::Tick(float DeltaTime)
 void APorter::InteractWithMe()
 {
 	UE_LOG(LogTemp,Warning, TEXT("Porter interacted with"));
-	Teleport(OtherPorter);
+	Teleport(PlayerCharacter);
 }
 
 void APorter::Teleport(class AActor* OtherActor)

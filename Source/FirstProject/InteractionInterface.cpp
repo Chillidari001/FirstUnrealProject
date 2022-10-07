@@ -8,3 +8,13 @@ void IInteractionInterface::InteractWithMe()
 {
 	
 }
+
+void IInteractionInterface::ShowInteractionUI()
+{
+	
+}
+
+void IInteractionInterface::HideInteractionUI()
+{
+	
+}

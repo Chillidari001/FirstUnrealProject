@@ -14,6 +14,11 @@ APorter::APorter()
 
 	PorterMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Porter Mesh"));
 	PorterMesh->SetupAttachment(RootComponent);
+
+	InteractionUI=CreateDefaultSubobject<UWidgetComponent>(TEXT("Interaction UI"));
+	InteractionUI->SetupAttachment(RootComponent);
+
+	InteractionUI->SetVisibility(false);
 }
 
 // Called when the game starts or when spawned
@@ -46,6 +51,16 @@ void APorter::Teleport(class AActor* OtherActor)
 			character->SetActorLocation(OtherPorter->GetActorLocation());
 		}
 	}
+}
+
+void APorter::ShowInteractionUI()
+{
+	InteractionUI->SetVisibility(true);
+}
+
+void APorter::HideInteractionUI()
+{
+	InteractionUI->SetVisibility(false);
 }
 
 /*void APorter::TeleportBack(class AActor* OtherActor)

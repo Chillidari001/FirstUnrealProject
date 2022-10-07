@@ -88,6 +88,7 @@ void AFirstProjectCharacter::BeginPlay()
 	Super::BeginPlay();
 
 	InteractBox->OnComponentBeginOverlap.AddDynamic(this, &AFirstProjectCharacter::OnBoxBeginOverlap);
+	InteractBox->OnComponentEndOverlap.AddDynamic(this, &AFirstProjectCharacter::OnBoxEndOverlap);
 }
 
 
@@ -100,6 +101,20 @@ void AFirstProjectCharacter::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedCo
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	Interface = Cast<IInteractionInterface>(OtherActor);
+	if(Interface)
+	{
+		Interface->ShowInteractionUI();
+	}
+}
+
+void AFirstProjectCharacter::OnBoxEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if(Interface)
+	{
+		Interface->HideInteractionUI();
+		Interface = nullptr;
+	}
 }
 
 

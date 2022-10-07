@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "InteractionInterface.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/WidgetComponent.h"
 #include "Porter.generated.h"
 
 UCLASS()
@@ -34,10 +35,16 @@ public:
 	UFUNCTION()
 	void Teleport(class AActor* OtherActor);
 
+	virtual void ShowInteractionUI() override;
+	virtual void HideInteractionUI() override;
+
 private:
 	UPROPERTY(EditAnywhere)
 	USceneComponent* PRootComponent;
 
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* PorterMesh;
+
+	UPROPERTY(EditAnywhere)
+	UWidgetComponent* InteractionUI;
 };

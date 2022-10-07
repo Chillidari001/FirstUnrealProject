@@ -86,34 +86,43 @@ void AFirstProjectCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 void AFirstProjectCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	InteractBox->OnComponentBeginOverlap.AddDynamic(this, &AFirstProjectCharacter::OnBoxBeginOverlap);
-	InteractBox->OnComponentEndOverlap.AddDynamic(this, &AFirstProjectCharacter::OnBoxEndOverlap);
 }
 
 
 void AFirstProjectCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-}
-
-void AFirstProjectCharacter::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	Interface = Cast<IInteractionInterface>(OtherActor);
-	if(Interface)
+	
+	TArray<AActor*> OverlappingActors;
+	InteractBox->GetOverlappingActors(OverlappingActors);
+	if(OverlappingActors.Num() == 0)
 	{
-		Interface->ShowInteractionUI();
+		if(Interface)
+		{
+			Interface->HideInteractionUI();
+			Interface = nullptr;
+		}
+		return;
 	}
-}
+	AActor* ClosestActor = OverlappingActors[0];
+	for(auto CurrentActor:OverlappingActors)
+	{
+		if(GetDistanceTo(CurrentActor)<GetDistanceTo(ClosestActor))
+		{
+			ClosestActor = CurrentActor;
+		}
+	}
 
-void AFirstProjectCharacter::OnBoxEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
 	if(Interface)
 	{
 		Interface->HideInteractionUI();
-		Interface = nullptr;
+	}
+
+	Interface = Cast<IInteractionInterface>(ClosestActor);
+
+	if(Interface)
+	{
+		Interface->ShowInteractionUI();
 	}
 }
 

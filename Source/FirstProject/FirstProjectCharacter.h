@@ -29,6 +29,12 @@ public:
 
 protected:
 
+    void SprintStart();
+    void SprintEnd();
+    
+    float JogSpeed = 600.f;
+	float SprintSpeed = 800.f;
+
 	/** Called for forwards/backward input */
 	void MoveForward(float Value);
 

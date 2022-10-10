@@ -54,6 +54,16 @@ AFirstProjectCharacter::AFirstProjectCharacter()
 	InteractBox->SetupAttachment(RootComponent);
 }
 
+void AFirstProjectCharacter::SprintStart()
+{
+	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+}
+
+void AFirstProjectCharacter::SprintEnd()
+{
+	GetCharacterMovement()->MaxWalkSpeed = JogSpeed;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -81,6 +91,10 @@ void AFirstProjectCharacter::SetupPlayerInputComponent(class UInputComponent* Pl
 
 	//Interaction
 	PlayerInputComponent->BindAction("Interact",IE_Pressed, this, &AFirstProjectCharacter::OnInteract);
+
+	//Sprinting
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AFirstProjectCharacter::SprintStart);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AFirstProjectCharacter::SprintEnd);
 }
 
 void AFirstProjectCharacter::BeginPlay()
